@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemaps
+Sitemap: https://dnschecker.org/sitemap.xml
+
+# Crawl delay (optional, be polite to servers)
+Crawl-delay: 1
