@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = ({ theme, onToggleTheme }) => {
+const Header = ({ theme, onToggleTheme, currentTab, onTabChange }) => {
   return (
     <>
       <header className="site-header" role="banner">
@@ -18,10 +18,38 @@ const Header = ({ theme, onToggleTheme }) => {
 
       <nav className="site-nav" role="navigation" aria-label="Main navigation">
         <ul className="nav-links">
-          <li><a href="/" className="active" aria-current="page">Home</a></li>
-          <li><a href="#dns-lookup">DNS Lookup</a></li>
-          <li><a href="#all-tools">All Tools</a></li>
-          <li><a href="#public-dns">Public DNS List</a></li>
+          <li>
+            <a 
+              href="#" 
+              className={currentTab === 'home' ? 'active' : ''} 
+              aria-current={currentTab === 'home' ? 'page' : undefined}
+              onClick={(e) => { e.preventDefault(); onTabChange('home'); }}
+            >Home</a>
+          </li>
+          <li>
+            <a 
+              href="#dns-lookup" 
+              className={currentTab === 'dns-lookup' ? 'active' : ''} 
+              aria-current={currentTab === 'dns-lookup' ? 'page' : undefined}
+              onClick={(e) => { e.preventDefault(); onTabChange('dns-lookup'); }}
+            >DNS Lookup</a>
+          </li>
+          <li>
+            <a 
+              href="#all-tools" 
+              className={currentTab === 'all-tools' ? 'active' : ''} 
+              aria-current={currentTab === 'all-tools' ? 'page' : undefined}
+              onClick={(e) => { e.preventDefault(); onTabChange('all-tools'); }}
+            >All Tools</a>
+          </li>
+          <li>
+            <a 
+              href="#public-dns" 
+              className={currentTab === 'public-dns' ? 'active' : ''} 
+              aria-current={currentTab === 'public-dns' ? 'page' : undefined}
+              onClick={(e) => { e.preventDefault(); onTabChange('public-dns'); }}
+            >Public DNS List</a>
+          </li>
         </ul>
         <div className="nav-actions">
           <button 

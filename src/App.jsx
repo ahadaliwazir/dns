@@ -61,23 +61,39 @@ function App() {
     setIsSearching(false);
   };
 
+  const [currentTab, setCurrentTab] = useState('home');
+
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <Header 
+        theme={theme} 
+        onToggleTheme={toggleTheme} 
+        currentTab={currentTab} 
+        onTabChange={setCurrentTab} 
+      />
 
       <main id="main-content" className="main-layout" role="main">
-        <div className="main-left">
-          <SearchPanel
-            onSearch={handleSearch}
-            isSearching={isSearching}
-            onAddServer={handleAddServer}
-            customServers={customServers}
-            onRemoveServer={handleRemoveServer}
-          />
-          <ResultTable results={results} domain={searchedDomain} />
-        </div>
-        <Sidebar />
+        {(currentTab === 'home' || currentTab === 'dns-lookup') ? (
+          <>
+            <div className="main-left">
+              <SearchPanel
+                onSearch={handleSearch}
+                isSearching={isSearching}
+                onAddServer={handleAddServer}
+                customServers={customServers}
+                onRemoveServer={handleRemoveServer}
+              />
+              <ResultTable results={results} domain={searchedDomain} />
+            </div>
+            <Sidebar />
+          </>
+        ) : (
+          <div className="coming-soon-container" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '6rem 2rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)' }}>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Coming Soon 🚧</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>We are actively building out the {currentTab === 'all-tools' ? 'All Tools' : 'Public DNS List'} section.</p>
+          </div>
+        )}
       </main>
 
       <Footer />
